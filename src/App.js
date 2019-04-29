@@ -1,5 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
+import AboutUs from './components/AboutUs'
+import ContactUs from './components/ContactUs'
 import './App.css';
 import Navigator from './components/Navigator';
 import Footer from './components/Footer';
@@ -11,6 +12,8 @@ function App() {
         <Router>
             <Navigator/>
             <Route exact path='/' component={Home}/>
+            <Route exact path='/about-us' component={AboutUs}/>
+            <Route exact path='/contact-us' component={ContactUs}/>
             <Footer/>
         </Router>
     );
