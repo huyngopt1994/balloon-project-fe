@@ -6,8 +6,10 @@
 ## Multiple Languages:
  We will use `react-intl` for supporting multiple languages.
 
-## Lib for building bootstrap UI
+## Lib for building bootstrap UI.
  We will use `react-boostrap` for building bootstrap UI.
 
-## Lib for requesting backend
+## Lib for requesting backend.
  We will use `axios` for calling requests to backend.
+
+## Using node-sass to loading from sass to css.
