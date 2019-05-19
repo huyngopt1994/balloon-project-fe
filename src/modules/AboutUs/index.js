@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import Footer from '../../components/Footer'
+import Navigator from '../../components/Navigator'
 
 class AboutUs extends Component {
     render() {
         return (
             <div>
+                <Navigator/>
                 <h2>Our Story</h2>
                 <p>Thanh Dung Balloon Company statrted as a family owned business,
                     located in Ho Chi Minh city, Viet Nam back in 1950s with a small
@@ -38,6 +41,7 @@ class AboutUs extends Component {
                     event.</p>
                 <p>Our elite reputation + designs are what make us Your Number One
                     Choice for lattex balloon adversting printing and Event Decor.</p>
+                <Footer/>
             </div>
         )
     }

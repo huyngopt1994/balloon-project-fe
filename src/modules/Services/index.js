@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import Footer from '../../components/Footer'
+import Navigator from '../../components/Navigator'
 
 class Services extends Component {
     render() {
-        return (<div>This is service</div>)
+        return (<div>
+            <Navigator/>
+            This is service
+            <Footer/>
+        </div>)
     }
 }
 

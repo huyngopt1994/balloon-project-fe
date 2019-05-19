@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import { Col, Container, Row } from 'react-bootstrap'
-import ControlledCarousel from '../../components/ControlCarousel'
+import Footer from '../../components/Footer'
+import Navigator from '../../components/Navigator'
 import Product from '../../components/ProductDetail'
 
 class Home extends Component {
     render() {
         return (
             <div>
-                {/*<ControlledCarousel/>*/}
+                <Navigator />
                 <Container>
-
                     <Row>
                         <Col><Product/></Col>
                         <Col><Product/></Col>
                         <Col><Product/></Col>
                     </Row>
                 </Container>
+                <Footer/>
             </div>
 
         )
