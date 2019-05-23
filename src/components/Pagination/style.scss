@@ -1,0 +1,35 @@
+@import "../../styles/vars";
+
+:local(.container) {
+  margin: 20px 0;
+  position: relative;
+
+  .pagination {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+  }
+  .page-link {
+    color: $primary-color;
+    border-color: $default-border-color;
+  }
+  .active {
+    .page-link {
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+  }
+  .page-size {
+    .size-label {
+      line-height: 36px;
+      display: inline-block;
+      vertical-align: top;
+      margin-right: 10px;
+    }
+    .size-select {
+      width: 70px;
+      display: inline-block;
+    }
+  }
+}

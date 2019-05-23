@@ -1,0 +1,155 @@
+// Standard colors
+$primary-color: #0078B7;
+$secondary-color: #20BCB9;
+$third-color: #38d9a9;
+$sub-color: #017B7F;
+$default-text-color: #4D4D4D;
+$default-header-text-color: #000;
+$default-border-color: #EEE;
+$white-color: #FFF;
+$danger-color: #e63129;
+
+// --- Color library
+$btn-primary-color: #0072bc;
+$link-color: #0099ff;
+$primary-light-color: #147794;
+$success-color: #8dd080;
+$header-color: #147794;
+$background-base: #f4f6f9;
+$text-color-base: #555555;
+$table-header-bg: #d8dde6;
+$main-text-color: #555555;
+$default-color: #99b3bd;
+$status-color-confirmed: #0078B7;
+
+$grey-background: #f6f6f6;
+$semi-dark: #DDD;
+
+$table-body-bg-light: #f4f6f9;
+$table-body-bg: #eceff5;
+$divider-bg: #eceff5;
+$input-bg: #f5f6f7;
+$header-modal-bg: #eceff5;
+
+$tab-default-bg: #f5f6f7;
+$tab-default-border: #d8dde6;
+$tab-active-bg: #33cc99;
+$notification-color: #ff9933;
+
+
+$c-grey-100: #f6f6f6;
+$c-grey-150: #EEEEEE;
+$c-grey-200: #DDDDDD;
+$c-grey-300: #CCCCCC;
+$c-grey-400: #BBBBBB;
+$c-grey-500: #AAAAAA;
+$c-grey-600: #999999;
+$c-grey-700: #777777;
+$c-grey-800: #666666;
+$c-grey-900: #555555;
+$c-grey-950: #333333;
+$c-grey-A300: #0A0A0A;
+$c-dark-gray: #717E87;
+
+$c-turquoise-100: #15aabf;
+$c-turquoise-200: #22b8cf;
+
+$c-yellow-100: #fbb03b;
+
+$wrap-width: 1400px;
+
+$c-accent: #0072bc;
+$c-accent-extra-light: #e5f1f8;
+
+$c-danger: #a94442;
+
+$gray-border: $c-grey-200 1px solid;
+
+$main-text-color: $c-grey-900;
+$dark-gray: $c-grey-950;
+
+$c-blue-grey-50: #f7f8f9;
+$c-blue-grey-100: #eceff6;
+$c-blue-grey-200: #d8dde6;
+$c-blue-grey-800: #728f9d;
+$c-light-grey: #A3A5B2;
+$c-text-default: #717E88;
+$c-light-blue: #429FC0;
+$c-light-blue-grey: #D8DCE6;
+$c-light-red: #e63129;
+$c-custom-single-checkbox-bg: $c-turquoise-100;
+
+$c-red-200: #e65f5f;
+
+$small-padding: 8px;
+$main-padding: 16px;
+$big-padding: 32px;
+$primary-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+
+$small-font-size: 12px;
+$regular-font-size: 14px;
+$medium-font-size: 18px;
+$big-font-size: 24px;
+$title-font-size: $big-padding;
+$extra-font-size: 48px;
+
+$side-bar-width: 332px;
+
+$disable-color: $c-grey-150;
+
+
+$hr-color: #e5e5e5;
+$heading-color: #1f1f1f;
+
+// --- Fonts
+
+$font-family-base: 'Roboto', sans-serif;
+$font-size-base: 14px;
+$font-size-sm: 12px;
+$font-size-lg: 16px;
+$font-size-h1: 36px;
+$font-size-h2: 20px;
+$font-size-h3: 18px;
+
+// --- Breakpints
+$mobile-small: 320px;
+$mobile-large: 384px;
+$tablet-small: 768px;
+$tablet-large: 768px;
+$screen-small: 1024px;
+$screen-large: 1280px;
+
+$small-padding: 8px;
+$main-padding: 16px;
+$big-padding: 32px;
+
+
+$medium-font-size: 18px;
+$big-font-size: 24px;
+$title-font-size: $big-padding;
+$extra-font-size: 48px;
+
+$c-light-blue-bg: #00aeef;
+$c-success: #33cc99;
+$c-light-blue-100: #5dcdff;
+$c-light-blue-200: #45c5ff;
+$c-light-blue-300: #17b7ff;
+$c-dark-grey: #717e88;
+$c-dark-blue: #0078B7;
+
+$body-color: #eceff5;
+$popover-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+$tab-active-background: #eceff5;
+$tab-active-border: 3px solid transparent;
+
+$bg-white-smoke: #eee;
+$bg-table-row-highlighted: #f4f5f7;
+$status-active: #00b4ff;
+$star-color: #ffd83d;
+$default-radius: 3px;
+$light-grey-color: #778f9b;
+$dark-blue-color: #1f2d3d;
+$light-grey-100: #b8c1cb;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
