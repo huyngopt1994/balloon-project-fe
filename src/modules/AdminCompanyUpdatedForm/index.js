@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import { createCompany } from '../../api'
+import Image from 'react-bootstrap/Image'
+import { getCompanyOne, updateCompany } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { error, success } from '../../components/toastr'
 
-class AdminCompanyForm extends Component {
+class AdminCompanyUpdatedForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -22,12 +23,25 @@ class AdminCompanyForm extends Component {
         this.handleFileChange = this.handleFileChange.bind(this)
     }
 
+    componentDidMount() {
+        const { id } = this.props.match.params
+        getCompanyOne(id)
+            .then(res => {
+                res.data.logoPreview = res.data.logo
+                this.setState(res.data)
+
+            })
+            .catch(err => {
+                error('Hệ thống bị lỗi xin vui lòng thử lại!')
+            })
+    }
+
     handleSubmit(event) {
         event.preventDefault();
-        createCompany(this.state)
+        updateCompany(this.state)
             .then(
                 res => {
-                    success('Tạo công ty thành công!')
+                    success('Cập nhật công ty thành công!')
                 }
             )
             .catch(
@@ -40,8 +54,12 @@ class AdminCompanyForm extends Component {
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value })
     }
-    handleFileChange(event){
-        this.setState({ [event.target.name]: event.target.files[0] })
+
+    handleFileChange(event) {
+        this.setState({
+            [event.target.name]: event.target.files[0],
+            logoPreview: URL.createObjectURL(event.target.files[0])
+        })
     }
 
     render() {
@@ -57,20 +75,25 @@ class AdminCompanyForm extends Component {
                             <Form.Label>Tên Công Ty</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Điền tên"
                                 onChange={this.handleChange}
                                 name='name'
+                                value={this.state.name}
                             />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridPicture">
                             <Form.Label>Ảnh Công ty</Form.Label>
+                            <Form.Text> <Image className='logo'
+                                               src={this.state.logoPreview}/>
+                            </Form.Text>
+
                             <Form.Control
                                 type="file"
                                 name="logo"
                                 onChange={this.handleFileChange}
                             />
                         </Form.Group>
+
                     </Form.Row>
 
                     <Form.Row>
@@ -80,6 +103,7 @@ class AdminCompanyForm extends Component {
                                 type="text"
                                 onChange={this.handleChange}
                                 name='telephone'
+                                value={this.state.telephone}
                             />
                         </Form.Group>
 
@@ -89,6 +113,7 @@ class AdminCompanyForm extends Component {
                                 type="text"
                                 name="tax_number"
                                 onChange={this.handleChange}
+                                value={this.state.tax_number}
                             />
                         </Form.Group>
 
@@ -98,6 +123,7 @@ class AdminCompanyForm extends Component {
                                 type="text"
                                 name="contact_name"
                                 onChange={this.handleChange}
+                                value={this.state.contact_name}
                             />
                         </Form.Group>
 
@@ -105,7 +131,7 @@ class AdminCompanyForm extends Component {
 
 
                     <Button variant="primary" type="submit">
-                        Tạo công ty
+                        Cập nhật công ty
                     </Button>
                 </Form>
             </div>
@@ -115,4 +141,4 @@ class AdminCompanyForm extends Component {
     }
 }
 
-export default AdminCompanyForm
+export default AdminCompanyUpdatedForm
