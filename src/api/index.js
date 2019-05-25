@@ -54,7 +54,17 @@ export function createCompany(companyData) {
 }
 
 export function updateCompany(companyId, companyData) {
-    return axios.put(`${env.BACKEND_URL}/admin/company/${companyId}`, companyData)
+    let bodyFormData = new FormData();
+    Object.entries(companyData).map(data => {
+
+        bodyFormData.append(data[0], data[1])
+
+    })
+    return axios.put(`${env.BACKEND_URL}/admin/company/${companyId}/`, bodyFormData, {
+        headers: {
+            'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+        }
+    })
 }
 
 export function getTransactionList() {

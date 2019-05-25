@@ -38,7 +38,12 @@ class AdminCompanyUpdatedForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        updateCompany(this.state)
+        const { id } = this.props.match.params
+        let data = this.state
+        if (typeof (data.logo) === 'string') {
+            delete data['logo']
+        }
+        updateCompany(id, data)
             .then(
                 res => {
                     success('Cập nhật công ty thành công!')
