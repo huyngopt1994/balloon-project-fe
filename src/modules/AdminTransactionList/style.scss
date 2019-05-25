@@ -1,0 +1,19 @@
+:local(.container) {
+  position: relative;
+
+  .organizations {
+    .organization-status {
+      text-align: center;
+      text-transform: uppercase;
+      padding: 5px 8px;
+      border-radius: 5px;
+      display: inline-block;
+      width: 60px;
+      font-size: 11px;
+    }
+  }
+}
+
+:local(.count-hightlight) {
+  font-weight: 700;
+}

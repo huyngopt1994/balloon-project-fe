@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
-import { getCompanyList } from '../../api'
+import { getProductList } from '../../api'
 import Navigator from '../../components/AdminNav'
 
 let pagination = {
@@ -13,16 +13,16 @@ let pagination = {
 
 }
 
-class AdminCompanyList extends Component {
+class AdminProductList extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            companyList: []
+            productList: []
         }
-        getCompanyList()
+        getProductList()
             .then(res => {
-                this.setState({ companyList: res.data.results })
+                this.setState({ productList: res.data.results })
             })
     }
 
@@ -37,19 +37,19 @@ class AdminCompanyList extends Component {
                     <thead>
                     <tr>
                         <th>Số thứ tự</th>
-                        <th>Tên Công ty</th>
+                        <th>Tên Sản phẩm</th>
                         <th>Ngày tạo</th>
                         <th>Ngày cập nhật</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.companyList.map(company => {
+                    {this.state.productList.map(product => {
                         return (
-                            <tr key={company.id}>
-                                <td><Link to={`/admin/company/${company.id}`}>{company.id}</Link></td>
-                                <td>{company.name}</td>
-                                <td>{company.created_at}</td>
-                                <td>{company.updated_at}</td>
+                            <tr key={product.id}>
+                                <td><Link to={`/admin/product/${product.id}`}>{product.id}</Link></td>
+                                <td>{product.name}</td>
+                                <td>{product.created_at}</td>
+                                <td>{product.updated_at}</td>
                             </tr>
                         )
                     })}
@@ -63,4 +63,4 @@ class AdminCompanyList extends Component {
     }
 }
 
-export default AdminCompanyList
+export default AdminProductList

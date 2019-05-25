@@ -1,3 +1,3 @@
 export default {
-    BACKEND_URL: 'https://test_something.com'
+    BACKEND_URL: 'http://localhost:8000'
 }

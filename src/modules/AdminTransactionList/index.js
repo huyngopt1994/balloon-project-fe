@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
-import { getCompanyList } from '../../api'
+import { getTransactionList } from '../../api'
 import Navigator from '../../components/AdminNav'
 
 let pagination = {
@@ -13,16 +13,16 @@ let pagination = {
 
 }
 
-class AdminCompanyList extends Component {
+class AdminTransactionList extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            companyList: []
+            transactionList: []
         }
-        getCompanyList()
+        getTransactionList()
             .then(res => {
-                this.setState({ companyList: res.data.results })
+                this.setState({ transactionList: res.data.results })
             })
     }
 
@@ -37,19 +37,25 @@ class AdminCompanyList extends Component {
                     <thead>
                     <tr>
                         <th>Số thứ tự</th>
-                        <th>Tên Công ty</th>
+                        <th>Loại</th>
+                        <th>Tổng</th>
+                        <th>Giá</th>
+                        <th>Tên Sản Phẩm</th>
                         <th>Ngày tạo</th>
                         <th>Ngày cập nhật</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.companyList.map(company => {
+                    {this.state.transactionList.map(transaction => {
                         return (
-                            <tr key={company.id}>
-                                <td><Link to={`/admin/company/${company.id}`}>{company.id}</Link></td>
-                                <td>{company.name}</td>
-                                <td>{company.created_at}</td>
-                                <td>{company.updated_at}</td>
+                            <tr key={transaction.id}>
+                                <td><Link to={`/admin/transaction/${transaction.id}`}>{transaction.id}</Link></td>
+                                <td>{transaction.type}</td>
+                                <td>{transaction.total}</td>
+                                <td>{transaction.price}</td>
+                                <td>{transaction.product.name}</td>
+                                <td>{transaction.created_at}</td>
+                                <td>{transaction.updated_at}</td>
                             </tr>
                         )
                     })}
@@ -63,4 +69,4 @@ class AdminCompanyList extends Component {
     }
 }
 
-export default AdminCompanyList
+export default AdminTransactionList

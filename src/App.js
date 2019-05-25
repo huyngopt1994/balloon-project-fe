@@ -2,6 +2,8 @@ import React from 'react';
 import AboutUs from './modules/AboutUs'
 import AdminCompanyList from './modules/AdminCompanyList'
 import './App.css';
+import AdminProductList from './modules/AdminProductList'
+import AdminTransactionList from './modules/AdminTransactionList'
 import ContactUs from './modules/ContactUs'
 import Home from './modules/Homes'
 import Login from './modules/Login'
@@ -16,6 +18,8 @@ function App() {
             <Route exact path='/contact-us' component={ContactUs}/>
             <Route exact path='/services' component={Services}/>
             <Route exact path='/admin' component={AdminCompanyList}/>
+            <Route exact path='/admin/product' component={AdminProductList} />
+            <Route exact path='/admin/transaction' component={AdminTransactionList} />
             <Route path='/admin/auth' component={Login}/>
         </Router>
     );
