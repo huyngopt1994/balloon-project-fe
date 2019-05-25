@@ -27,7 +27,18 @@ export function createProduct(productData) {
 }
 
 export function updateProduct(productId, productData) {
-    return axios.put(`${env.BACKEND_URL}/product/${productId}`, productData)
+    let bodyFormData = new FormData();
+    Object.entries(productData).map(data => {
+
+        bodyFormData.append(data[0], data[1])
+
+    })
+
+    return axios.put(`${env.BACKEND_URL}/product/${productId}/`, bodyFormData, {
+        headers: {
+            'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+        }
+    })
 }
 
 export function getCompanyList() {

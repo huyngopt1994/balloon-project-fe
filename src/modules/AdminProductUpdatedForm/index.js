@@ -3,20 +3,19 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Image from 'react-bootstrap/Image'
-import { getCompanyOne, updateCompany } from '../../api'
+import { getProductOne, updateProduct } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { error, success } from '../../components/toastr'
 
-class AdminCompanyUpdatedForm extends Component {
+class AdminProductUpdatedForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
             name: '',
-            telephone: '',
-            tax_number: '',
+            description: '',
+            image: '',
             contact_name: '',
-            logo: '',
-            logoPreview: ''
+            imagePreview: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -25,9 +24,9 @@ class AdminCompanyUpdatedForm extends Component {
 
     componentDidMount() {
         const { id } = this.props.match.params
-        getCompanyOne(id)
+        getProductOne(id)
             .then(res => {
-                res.data.logoPreview = res.data.logo
+                res.data.imagePreview = res.data.image
                 this.setState(res.data)
 
             })
@@ -40,13 +39,13 @@ class AdminCompanyUpdatedForm extends Component {
         event.preventDefault();
         const { id } = this.props.match.params
         let data = this.state
-        if (typeof (data.logo) === 'string') {
-            delete data['logo']
+        if (typeof (data.image) === 'string') {
+            delete data['image']
         }
-        updateCompany(id, data)
+        updateProduct(id, data)
             .then(
                 res => {
-                    success('Cập nhật công ty thành công!')
+                    success('Cập nhật sản phẩm thành công!')
                 }
             )
             .catch(
@@ -63,7 +62,7 @@ class AdminCompanyUpdatedForm extends Component {
     handleFileChange(event) {
         this.setState({
             [event.target.name]: event.target.files[0],
-            logoPreview: URL.createObjectURL(event.target.files[0])
+            imagePreview: URL.createObjectURL(event.target.files[0])
         })
     }
 
@@ -77,7 +76,7 @@ class AdminCompanyUpdatedForm extends Component {
                 >
                     <Form.Row>
                         <Form.Group md='3' as={Col} controlId="formGridName">
-                            <Form.Label>Tên Công Ty</Form.Label>
+                            <Form.Label>Tên Sản phẩm</Form.Label>
                             <Form.Control
                                 type="text"
                                 onChange={this.handleChange}
@@ -87,14 +86,14 @@ class AdminCompanyUpdatedForm extends Component {
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridPicture">
-                            <Form.Label>Ảnh Công ty</Form.Label>
+                            <Form.Label>Ảnh Sản Phẩm</Form.Label>
                             <Form.Text> <Image className='logo'
-                                               src={this.state.logoPreview}/>
+                                               src={this.state.imagePreview}/>
                             </Form.Text>
 
                             <Form.Control
                                 type="file"
-                                name="logo"
+                                name="image"
                                 onChange={this.handleFileChange}
                             />
                         </Form.Group>
@@ -102,41 +101,19 @@ class AdminCompanyUpdatedForm extends Component {
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group md='3' as={Col} controlId="formGridPhone">
-                            <Form.Label>Số điện thoại</Form.Label>
+                        <Form.Group md='3' as={Col} controlId="formGridDescription">
+                            <Form.Label>Chi tiết sản phẩm</Form.Label>
                             <Form.Control
                                 type="text"
                                 onChange={this.handleChange}
-                                name='telephone'
-                                value={this.state.telephone}
+                                name='description'
+                                value={this.state.description}
                             />
                         </Form.Group>
-
-                        <Form.Group md='3' as={Col} controlId="formGridTaxNumber">
-                            <Form.Label>Mã số thuế</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="tax_number"
-                                onChange={this.handleChange}
-                                value={this.state.tax_number}
-                            />
-                        </Form.Group>
-
-                        <Form.Group md='3' as={Col} controlId="formGridContact">
-                            <Form.Label>Người liên lạc</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="contact_name"
-                                onChange={this.handleChange}
-                                value={this.state.contact_name}
-                            />
-                        </Form.Group>
-
                     </Form.Row>
 
-
                     <Button variant="primary" type="submit">
-                        Cập nhật công ty
+                        Cập nhật sản phẩm
                     </Button>
                 </Form>
             </div>
@@ -145,4 +122,4 @@ class AdminCompanyUpdatedForm extends Component {
     }
 }
 
-export default AdminCompanyUpdatedForm
+export default AdminProductUpdatedForm
