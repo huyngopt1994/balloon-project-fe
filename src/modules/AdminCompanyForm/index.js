@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
+import { createCompany } from '../../api'
 import Navigator from '../../components/AdminNav'
+import { error, success } from '../../components/toastr'
 
 class AdminCompanyForm extends Component {
     constructor(props) {
@@ -16,15 +18,29 @@ class AdminCompanyForm extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
+        this.handleFileChange = this.handleFileChange.bind(this)
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state)
+        createCompany(this.state)
+            .then(
+                res => {
+                    success('Tạo công ty thành công!')
+                }
+            )
+            .catch(
+                err => {
+                    error('Hệ thống bị lỗi xin vui lòng thử lại!')
+                }
+            )
     }
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value })
+    }
+    handleFileChange(event){
+        this.setState({ [event.target.name]: event.target.files[0] })
     }
 
     render() {
@@ -51,7 +67,7 @@ class AdminCompanyForm extends Component {
                             <Form.Control
                                 type="file"
                                 name="logo"
-                                onChange={this.handleChange}
+                                onChange={this.handleFileChange}
                             />
                         </Form.Group>
                     </Form.Row>

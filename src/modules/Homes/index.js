@@ -14,7 +14,6 @@ class Home extends Component {
         }
         getProductList()
             .then(result => {
-                console.log(result)
                 this.setState({ 'products': result.data.results })
             })
             .catch(err => {

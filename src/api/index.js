@@ -3,8 +3,7 @@ import env from '../environments'
 
 export function getProductList() {
     return axios.get(`${env.BACKEND_URL}/product`, {
-        headers: {
-        },
+        headers: {},
     })
 }
 
@@ -13,7 +12,18 @@ export function getProductOne(productId) {
 }
 
 export function createProduct(productData) {
-    return axios.post(`${env.BACKEND_URL}/product`, productData)
+    let bodyFormData = new FormData();
+    Object.entries(productData).map(data => {
+
+        bodyFormData.append(data[0], data[1])
+
+    })
+
+    return axios.post(`${env.BACKEND_URL}/product/`, bodyFormData, {
+        headers: {
+            'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+        }
+    })
 }
 
 export function updateProduct(productId, productData) {
@@ -29,7 +39,18 @@ export function getCompanyOne(companyId) {
 }
 
 export function createCompany(companyData) {
-    return axios.post(`${env.BACKEND_URL}/admin/company`, companyData)
+    let bodyFormData = new FormData();
+    Object.entries(companyData).map(data => {
+
+        bodyFormData.append(data[0], data[1])
+
+    })
+
+    return axios.post(`${env.BACKEND_URL}/admin/company/`, bodyFormData, {
+        headers: {
+            'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+        }
+    })
 }
 
 export function updateCompany(companyId, companyData) {
