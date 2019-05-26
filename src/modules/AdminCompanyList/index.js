@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
 import { getCompanyList } from '../../api'
 import Navigator from '../../components/AdminNav'
+import { convertUtcTimeToLocalTime } from '../../utils'
 
 
 class AdminCompanyList extends Component {
@@ -57,8 +58,8 @@ class AdminCompanyList extends Component {
                             <tr key={company.id}>
                                 <td><Link to={`/admin/company/${company.id}`}>{company.id}</Link></td>
                                 <td>{company.name}</td>
-                                <td>{company.created_at}</td>
-                                <td>{company.updated_at}</td>
+                                <td>{convertUtcTimeToLocalTime(company.created_at)}</td>
+                                <td>{convertUtcTimeToLocalTime(company.updated_at)}</td>
                             </tr>
                         )
                     })}

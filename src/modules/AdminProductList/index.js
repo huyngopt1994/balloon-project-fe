@@ -5,6 +5,7 @@ import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
 import { getProductList } from '../../api'
 import Navigator from '../../components/AdminNav'
+import { convertUtcTimeToLocalTime } from '../../utils'
 
 let pagination = {
     activePage: 1,
@@ -65,8 +66,8 @@ class AdminProductList extends Component {
                             <tr key={product.id}>
                                 <td><Link to={`/admin/product/${product.id}`}>{product.id}</Link></td>
                                 <td>{product.name}</td>
-                                <td>{product.created_at}</td>
-                                <td>{product.updated_at}</td>
+                                <td>{convertUtcTimeToLocalTime(product.created_at)}</td>
+                                <td>{convertUtcTimeToLocalTime(product.updated_at)}</td>
                             </tr>
                         )
                     })}

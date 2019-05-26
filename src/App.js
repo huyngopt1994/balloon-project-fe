@@ -8,6 +8,7 @@ import AdminProductForm from './modules/AdminProductForm'
 import AdminProductList from './modules/AdminProductList'
 import AdminProductUpdatedForm from './modules/AdminProductUpdatedForm'
 import AdminTransactionList from './modules/AdminTransactionList'
+import AdminTransactionReadForm from './modules/AdminTransactionReadForm'
 import ContactUs from './modules/ContactUs'
 import Home from './modules/Homes'
 import Login from './modules/Login'
@@ -28,6 +29,7 @@ function App() {
             <Route exact path='/admin/product/create' component={AdminProductForm}/>
             <Route exact path='/admin/product/:id(\d+)' component={AdminProductUpdatedForm} />
             <Route exact path='/admin/transaction' component={AdminTransactionList} />
+            <Route exact path='/admin/transaction/:id(\d+)' component={AdminTransactionReadForm} />
             <Route path='/admin/auth' component={Login}/>
         </Router>
     );

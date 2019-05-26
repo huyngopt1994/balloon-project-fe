@@ -17,7 +17,7 @@ body {
 
 .adminSearch {
     display: inline-block;
-    width: 150px;
+    width: 250px;
     margin: 10px;
 }
 
@@ -40,7 +40,11 @@ form .form-group {
     padding: 10px 15px !important;
 }
 form .form-label {
-    color: blue;
+    color: black;
+    font-weight: bold;
+}
+form .form-control {
+    color: black;
 }
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
