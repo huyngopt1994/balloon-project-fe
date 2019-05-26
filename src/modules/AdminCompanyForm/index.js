@@ -53,6 +53,16 @@ class AdminCompanyForm extends Component {
                     onSubmit={this.handleSubmit}
                 >
                     <Form.Row>
+                        <Form.Group as={Col} controlId="formGridPicture">
+                            <Form.Label>Ảnh Công ty</Form.Label>
+                            <Form.Control
+                                type="file"
+                                name="logo"
+                                onChange={this.handleFileChange}
+                            />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
                         <Form.Group md='3' as={Col} controlId="formGridName">
                             <Form.Label>Tên Công Ty</Form.Label>
                             <Form.Control
@@ -62,13 +72,13 @@ class AdminCompanyForm extends Component {
                                 name='name'
                             />
                         </Form.Group>
-
-                        <Form.Group as={Col} controlId="formGridPicture">
-                            <Form.Label>Ảnh Công ty</Form.Label>
+                        <Form.Group md='3' as={Col} controlId="formGridName">
+                            <Form.Label>Địa Chỉ Công Ty</Form.Label>
                             <Form.Control
-                                type="file"
-                                name="logo"
-                                onChange={this.handleFileChange}
+                                type="text"
+                                onChange={this.handleChange}
+                                name='address'
+                                value={this.state.address}
                             />
                         </Form.Group>
                     </Form.Row>

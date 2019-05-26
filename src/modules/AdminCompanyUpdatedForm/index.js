@@ -14,6 +14,7 @@ class AdminCompanyUpdatedForm extends Component {
             name: '',
             telephone: '',
             tax_number: '',
+            address: '',
             contact_name: '',
             logo: '',
             logoPreview: ''
@@ -76,16 +77,6 @@ class AdminCompanyUpdatedForm extends Component {
                     onSubmit={this.handleSubmit}
                 >
                     <Form.Row>
-                        <Form.Group md='3' as={Col} controlId="formGridName">
-                            <Form.Label>Tên Công Ty</Form.Label>
-                            <Form.Control
-                                type="text"
-                                onChange={this.handleChange}
-                                name='name'
-                                value={this.state.name}
-                            />
-                        </Form.Group>
-
                         <Form.Group as={Col} controlId="formGridPicture">
                             <Form.Label>Ảnh Công ty</Form.Label>
                             <Form.Text> <Image className='logo'
@@ -96,6 +87,27 @@ class AdminCompanyUpdatedForm extends Component {
                                 type="file"
                                 name="logo"
                                 onChange={this.handleFileChange}
+                            />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group md='3' as={Col} controlId="formGridName">
+                            <Form.Label>Tên Công Ty</Form.Label>
+                            <Form.Control
+                                type="text"
+                                onChange={this.handleChange}
+                                name='name'
+                                value={this.state.name}
+                            />
+                        </Form.Group>
+
+                        <Form.Group md='3' as={Col} controlId="formGridName">
+                            <Form.Label>Địa Chỉ Công Ty</Form.Label>
+                            <Form.Control
+                                type="text"
+                                onChange={this.handleChange}
+                                name='address'
+                                value={this.state.address}
                             />
                         </Form.Group>
 
