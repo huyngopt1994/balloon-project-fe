@@ -7,6 +7,7 @@ import AdminCompanyUpdatedForm from './modules/AdminCompanyUpdatedForm'
 import AdminProductForm from './modules/AdminProductForm'
 import AdminProductList from './modules/AdminProductList'
 import AdminProductUpdatedForm from './modules/AdminProductUpdatedForm'
+import AdminTransactionForm from './modules/AdminTransactionForm'
 import AdminTransactionList from './modules/AdminTransactionList'
 import AdminTransactionReadForm from './modules/AdminTransactionReadForm'
 import ContactUs from './modules/ContactUs'
@@ -29,6 +30,7 @@ function App() {
             <Route exact path='/admin/product/create' component={AdminProductForm}/>
             <Route exact path='/admin/product/:id(\d+)' component={AdminProductUpdatedForm} />
             <Route exact path='/admin/transaction' component={AdminTransactionList} />
+            <Route exact path='/admin/transaction/create' component={AdminTransactionForm}/>
             <Route exact path='/admin/transaction/:id(\d+)' component={AdminTransactionReadForm} />
             <Route path='/admin/auth' component={Login}/>
         </Router>

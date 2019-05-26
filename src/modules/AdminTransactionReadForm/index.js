@@ -22,7 +22,7 @@ class AdminTransactionReadForm extends Component {
             transaction_products: [],
             signed_name: '',
             total_price_before_vat: 0,
-            total_price_after_vat: 0
+            total_price_after_vat: 0,
         }
     }
 
@@ -55,8 +55,9 @@ class AdminTransactionReadForm extends Component {
                                 value={this.state.type}
                             />
                         </Form.Group>
-
-                        <Form.Group md='3' as={Col} controlId="formGridTaxNumber">
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group md='4' as={Col} controlId="formGridTaxNumber">
                             <Form.Label>Giờ tạo</Form.Label>
                             <Form.Control
                                 disabled
@@ -66,8 +67,8 @@ class AdminTransactionReadForm extends Component {
                             />
                         </Form.Group>
 
-                        <Form.Group md='3' as={Col} controlId="formGridPhone">
-                            <Form.Label>Người kí</Form.Label>
+                        <Form.Group md='4' as={Col} controlId="formGridPhone">
+                            <Form.Label>Người kí tên</Form.Label>
                             <Form.Control
                                 disabled
                                 type="text"
@@ -76,7 +77,7 @@ class AdminTransactionReadForm extends Component {
                             />
                         </Form.Group>
 
-                        <Form.Group md='3' as={Col} controlId="formGridCompanyName">
+                        <Form.Group md='4' as={Col} controlId="formGridCompanyName">
                             <Form.Label>Tên công ty</Form.Label>
                             <Form.Control
                                 disabled
@@ -104,7 +105,7 @@ class AdminTransactionReadForm extends Component {
                                         <Form.Label>Giá</Form.Label>
                                         <Form.Control
                                             disabled
-                                            type="text"
+                                            type="number"
                                             name='product_name'
                                             value={transaction_product.price}
                                         />
@@ -113,7 +114,7 @@ class AdminTransactionReadForm extends Component {
                                         <Form.Label>Số lượng</Form.Label>
                                         <Form.Control
                                             disabled
-                                            type="text"
+                                            type="number"
                                             name='product_name'
                                             value={transaction_product.total}
                                         />
@@ -122,7 +123,7 @@ class AdminTransactionReadForm extends Component {
                                         <Form.Label>Tổng tiền</Form.Label>
                                         <Form.Control
                                             disabled
-                                            type="text"
+                                            type="number"
                                             name='product_name'
                                             value={transaction_product.total_price}
                                         />
@@ -133,29 +134,29 @@ class AdminTransactionReadForm extends Component {
                     }
                     <hr/>
                     <Form.Row>
-                        <Form.Group md='3' as={Col} controlId="formGridTransportFee">
+                        <Form.Group md='4' as={Col} controlId="formGridTransportFee">
                             <Form.Label>Tiền vận chuyển</Form.Label>
                             <Form.Control
                                 disabled
-                                type="text"
+                                type="number"
                                 name='transport_fee'
                                 value={this.state.transport_fee}
                             />
                         </Form.Group>
-                        <Form.Group md='3' as={Col} controlId="formGridBeforeVAT">
+                        <Form.Group md='4' as={Col} controlId="formGridBeforeVAT">
                             <Form.Label>Tiền Trước VAT</Form.Label>
                             <Form.Control
                                 disabled
-                                type="text"
+                                type="number"
                                 name='total_price_before_vat'
                                 value={this.state.total_price_before_vat}
                             />
                         </Form.Group>
-                        <Form.Group md='3' as={Col} controlId="formGridAfterVAT">
+                        <Form.Group md='4' as={Col} controlId="formGridAfterVAT">
                             <Form.Label>Tiền Sau VAT</Form.Label>
                             <Form.Control
                                 disabled
-                                type="text"
+                                type="number"
                                 name='total_price_after_vat'
                                 value={this.state.total_price_after_vat}
                             />

@@ -24,7 +24,7 @@ class AdminTransactionList extends Component {
             <div>
                 <Navigator/>
                 <div>
-                    <Button className='createButton'>Tạo mới</Button>
+                    <Link to='/admin/transaction/create'><Button className='createButton'>Tạo mới</Button></Link>
                 </div>
                 <Table>
                     <thead>
