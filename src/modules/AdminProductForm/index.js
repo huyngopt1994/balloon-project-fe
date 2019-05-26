@@ -72,9 +72,11 @@ class AdminProductForm extends Component {
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group md='3' as={Col} controlId="formGridDescription">
+                        <Form.Group  as={Col} controlId="formGridDescription">
                             <Form.Label>Chi tiết sản phẩm</Form.Label>
                             <Form.Control
+                                size='lg'
+                                as='textarea'
                                 type="text"
                                 onChange={this.handleChange}
                                 name='description'

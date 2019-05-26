@@ -5,13 +5,6 @@ import { Link } from 'react-router-dom'
 import { getTransactionList } from '../../api'
 import Navigator from '../../components/AdminNav'
 
-let pagination = {
-    activePage: 1,
-    pageSize: 10,
-    pages: ['1212', '12121'],
-    totalPage: 20150
-
-}
 
 class AdminTransactionList extends Component {
 
@@ -38,9 +31,9 @@ class AdminTransactionList extends Component {
                     <tr>
                         <th>Số thứ tự</th>
                         <th>Loại</th>
-                        <th>Tổng</th>
-                        <th>Giá</th>
-                        <th>Tên Sản Phẩm</th>
+                        <th>Tổng Sau VAT</th>
+                        <th>Tên người mua</th>
+                        <th>Người kí tên</th>
                         <th>Ngày tạo</th>
                         <th>Ngày cập nhật</th>
                     </tr>
@@ -51,9 +44,9 @@ class AdminTransactionList extends Component {
                             <tr key={transaction.id}>
                                 <td><Link to={`/admin/transaction/${transaction.id}`}>{transaction.id}</Link></td>
                                 <td>{transaction.type}</td>
-                                <td>{transaction.total}</td>
-                                <td>{transaction.price}</td>
-                                <td>{transaction.product.name}</td>
+                                <td>{transaction.total_price_after_vat}</td>
+                                <td><Link to={`/admin/company/${transaction.company.id}`}>{transaction.company.name}</Link></td>
+                                <td>{transaction.signed_name}</td>
                                 <td>{transaction.created_at}</td>
                                 <td>{transaction.updated_at}</td>
                             </tr>
