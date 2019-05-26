@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormControl } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
@@ -24,6 +25,18 @@ class AdminProductList extends Component {
             .then(res => {
                 this.setState({ productList: res.data.results })
             })
+        this.onSearchChange = this.onSearchChange.bind(this)
+    }
+
+    onSearchChange(e) {
+        if (e.target.value) {
+            console.log(e.target.value)
+            getProductList({ search: e.target.value })
+                .then(res => {
+                    this.setState({ productList: res.data.results })
+                })
+
+        }
     }
 
     render() {
@@ -31,6 +44,10 @@ class AdminProductList extends Component {
             <div>
                 <Navigator/>
                 <div>
+                    <FormControl
+                        size='sm' type="text" placeholder="Search" className="mr-sm-2 adminSearch"
+                        onChange={this.onSearchChange}
+                    />
                     <Link to='/admin/product/create'><Button className='createButton'>Tạo mới</Button></Link>
                 </div>
                 <Table>

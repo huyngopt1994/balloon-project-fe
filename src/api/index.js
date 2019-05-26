@@ -1,10 +1,8 @@
 import axios from 'axios';
 import env from '../environments'
 
-export function getProductList() {
-    return axios.get(`${env.BACKEND_URL}/product`, {
-        headers: {},
-    })
+export function getProductList(params = {}) {
+    return axios.get(`${env.BACKEND_URL}/product`, { params: params })
 }
 
 export function getProductOne(productId) {
@@ -41,8 +39,8 @@ export function updateProduct(productId, productData) {
     })
 }
 
-export function getCompanyList() {
-    return axios.get(`${env.BACKEND_URL}/admin/company`)
+export function getCompanyList(params = {}) {
+    return axios.get(`${env.BACKEND_URL}/admin/company`, { params: params })
 }
 
 export function getCompanyOne(companyId) {

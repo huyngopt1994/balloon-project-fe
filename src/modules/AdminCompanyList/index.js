@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
+import { FormControl } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
 import { getCompanyList } from '../../api'
 import Navigator from '../../components/AdminNav'
 
-let pagination = {
-    activePage: 1,
-    pageSize: 10,
-    pages: ['1212', '12121'],
-    totalPage: 20150
-
-}
 
 class AdminCompanyList extends Component {
 
@@ -24,6 +18,17 @@ class AdminCompanyList extends Component {
             .then(res => {
                 this.setState({ companyList: res.data.results })
             })
+        this.onSearchChange = this.onSearchChange.bind(this)
+    }
+
+    onSearchChange(e) {
+        if (e.target.value) {
+            getCompanyList({ search: e.target.value })
+                .then(res => {
+                    this.setState({ companyList: res.data.results })
+                })
+
+        }
     }
 
     render() {
@@ -31,6 +36,10 @@ class AdminCompanyList extends Component {
             <div>
                 <Navigator/>
                 <div>
+                    <FormControl
+                        size='sm' type="text" placeholder="Search" className="mr-sm-2 adminSearch"
+                        onChange={this.onSearchChange}
+                    />
                     <Link to='/admin/company/create'><Button className='createButton'>Tạo mới</Button></Link>
                 </div>
                 <Table>

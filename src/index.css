@@ -12,6 +12,13 @@ body {
 .createButton {
     margin: 10px 20px;
     float: right;
+    display: inline-block;
+}
+
+.adminSearch {
+    display: inline-block;
+    width: 150px;
+    margin: 10px;
 }
 
 .logo {
