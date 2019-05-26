@@ -54,7 +54,7 @@ class AdminCompanyForm extends Component {
                 >
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridPicture">
-                            <Form.Label>Ảnh Công ty</Form.Label>
+                            <Form.Label>Ảnh công ty</Form.Label>
                             <Form.Control
                                 type="file"
                                 name="logo"
@@ -64,7 +64,7 @@ class AdminCompanyForm extends Component {
                     </Form.Row>
                     <Form.Row>
                         <Form.Group md='3' as={Col} controlId="formGridName">
-                            <Form.Label>Tên Công Ty</Form.Label>
+                            <Form.Label>Tên công ty</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Điền tên"
@@ -73,7 +73,7 @@ class AdminCompanyForm extends Component {
                             />
                         </Form.Group>
                         <Form.Group md='3' as={Col} controlId="formGridName">
-                            <Form.Label>Địa Chỉ Công Ty</Form.Label>
+                            <Form.Label>Địa chỉ công ty</Form.Label>
                             <Form.Control
                                 type="text"
                                 onChange={this.handleChange}

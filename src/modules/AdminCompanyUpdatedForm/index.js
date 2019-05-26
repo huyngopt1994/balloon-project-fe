@@ -78,7 +78,7 @@ class AdminCompanyUpdatedForm extends Component {
                 >
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridPicture">
-                            <Form.Label>Ảnh Công ty</Form.Label>
+                            <Form.Label>Ảnh công ty</Form.Label>
                             <Form.Text> <Image className='logo'
                                                src={this.state.logoPreview}/>
                             </Form.Text>
@@ -91,8 +91,8 @@ class AdminCompanyUpdatedForm extends Component {
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
-                        <Form.Group md='3' as={Col} controlId="formGridName">
-                            <Form.Label>Tên Công Ty</Form.Label>
+                        <Form.Group md='4' as={Col} controlId="formGridName">
+                            <Form.Label>Tên công ty</Form.Label>
                             <Form.Control
                                 type="text"
                                 onChange={this.handleChange}
@@ -101,8 +101,8 @@ class AdminCompanyUpdatedForm extends Component {
                             />
                         </Form.Group>
 
-                        <Form.Group md='3' as={Col} controlId="formGridName">
-                            <Form.Label>Địa Chỉ Công Ty</Form.Label>
+                        <Form.Group md='4' as={Col} controlId="formGridName">
+                            <Form.Label>Địa chỉ công ty</Form.Label>
                             <Form.Control
                                 type="text"
                                 onChange={this.handleChange}
@@ -134,7 +134,7 @@ class AdminCompanyUpdatedForm extends Component {
                             />
                         </Form.Group>
 
-                        <Form.Group md='3' as={Col} controlId="formGridContact">
+                        <Form.Group md='4' as={Col} controlId="formGridContact">
                             <Form.Label>Người liên lạc</Form.Label>
                             <Form.Control
                                 type="text"
