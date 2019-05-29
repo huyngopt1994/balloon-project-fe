@@ -31,7 +31,6 @@ class AdminProductList extends Component {
 
     onSearchChange(e) {
         if (e.target.value) {
-            console.log(e.target.value)
             getProductList({ search: e.target.value })
                 .then(res => {
                     this.setState({ productList: res.data.results })

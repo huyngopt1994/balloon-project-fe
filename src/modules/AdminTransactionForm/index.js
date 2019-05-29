@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import { createProduct, getCompanyList } from '../../api'
+import { createProduct, getCompanyList, getProductList } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { error, success } from '../../components/toastr'
 
@@ -23,12 +23,16 @@ class AdminTransactionForm extends Component {
             signed_name: '',
             total_price_before_vat: 0,
             total_price_after_vat: 0,
-            companyList: []
+            companyList: [],
+            productList: [],
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         this.handleTransportChange = this.handleTransportChange.bind(this)
         this.createCompanyOptions = this.createCompanyOptions.bind(this)
+        this.addTransactionProduct = this.addTransactionProduct.bind(this)
+        this.handleProductTransactionChange = this.handleProductTransactionChange.bind(this)
+        this.preCalculateTotalAfterAndBeforeVat = this.preCalculateTotalAfterAndBeforeVat.bind(this)
     }
 
     componentDidMount() {
@@ -37,6 +41,10 @@ class AdminTransactionForm extends Component {
                 this.setState({ companyList: res.data.results }))
             .catch(err => error('Hệ thống bị lỗi xin vui lòng thử lại!')
             )
+        getProductList()
+            .then(res =>
+                this.setState({ productList: res.data.results }))
+            .catch(err => error('Hệ thống bị lỗi xin vui lòng thử lại'))
     }
 
     handleSubmit(event) {
@@ -54,18 +62,38 @@ class AdminTransactionForm extends Component {
             )
     }
 
+    preCalculateTotalAfterAndBeforeVat() {
+        let totalPriceBeforeTax = parseInt(this.state.transport_fee)
+        this.state.transaction_products.map((transaction_product, idx) => {
+            totalPriceBeforeTax += parseInt(transaction_product.total_price)
+        })
+        let totalPriceAfterTax = parseInt(totalPriceBeforeTax * 110 / 100)
+        this.setState({
+            total_price_before_vat: totalPriceBeforeTax,
+            total_price_after_vat: totalPriceAfterTax,
+        })
+
+    }
+
+    handleProductTransactionChange(event) {
+        let productTransactions = [...this.state.transaction_products]
+        productTransactions[event.target.dataset.id][event.target.name] = event.target.value;
+
+        if (event.target.name === 'price' || event.target.name === 'total') {
+            let totalPrice = productTransactions[event.target.dataset.id]['price'] * productTransactions[event.target.dataset.id]['total']
+            productTransactions[event.target.dataset.id]['total_price'] = totalPrice
+        }
+        this.setState({ transaction_products: productTransactions }, () => this.preCalculateTotalAfterAndBeforeVat())
+    }
+
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value })
     }
 
     handleTransportChange(event) {
-        let total_price_before_vat = (parseInt(event.target.value))
-        let total_price_after_vat = parseInt(total_price_before_vat * 110 / 100)
         this.setState({
-            total_price_before_vat: total_price_before_vat,
-            total_price_after_vat: total_price_after_vat,
             [event.target.name]: event.target.value
-        })
+        }, () => this.preCalculateTotalAfterAndBeforeVat())
     }
 
     createCompanyOptions = () => {
@@ -79,8 +107,28 @@ class AdminTransactionForm extends Component {
 
     }
 
+    createProductOptions = () => {
+        return this.state.productList.length
+            ? this.state.productList.map(data => (
+                <option key={data.id} value={data.id}>
+                    {data.name}
+                </option>
+            ))
+            : "";
+
+    }
+    addTransactionProduct = (e) => {
+        this.setState(prevState => ({
+            transaction_products: [...prevState.transaction_products, {
+                product_name: '',
+                price: 0,
+                total: 0,
+                total_price: 0
+            }]
+        }))
+    }
+
     render() {
-        console.log(this.state)
         return (
             <div>
                 <Navigator/>
@@ -113,6 +161,58 @@ class AdminTransactionForm extends Component {
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
+                    <hr/>
+                    <Button className='add-more-product' onClick={this.addTransactionProduct}>Thêm sản phẩm</Button>
+                    {
+                        this.state.transaction_products.map((transaction_product, idx) => {
+                            return (
+                                <Form.Row key={idx}>
+                                    <Form.Group md='3' as={Col} controlId="formGridBeforeVAT">
+                                        <Form.Label>Sản phẩm</Form.Label>
+                                        <Form.Control
+                                            data-id={idx}
+                                            as="select"
+                                            value={transaction_product.product_name}
+                                            name='product_name'
+                                            onChange={this.handleProductTransactionChange}
+                                        >
+                                            {this.createProductOptions()}
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group md='3' as={Col} controlId="formGridBeforeVAT">
+                                        <Form.Label>Giá</Form.Label>
+                                        <Form.Control
+                                            data-id={idx}
+                                            type="number"
+                                            name='price'
+                                            value={transaction_product.price}
+                                            onChange={this.handleProductTransactionChange}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group md='3' as={Col} controlId="formGridBeforeVAT">
+                                        <Form.Label>Số lượng</Form.Label>
+                                        <Form.Control
+                                            data-id={idx}
+                                            type="number"
+                                            name='total'
+                                            value={transaction_product.total}
+                                            onChange={this.handleProductTransactionChange}
+                                        />
+                                    </Form.Group>
+                                    <Form.Group md='3' as={Col} controlId="formGridBeforeVAT">
+                                        <Form.Label>Tổng tiền</Form.Label>
+                                        <Form.Control
+                                            data-id={idx}
+                                            disabled
+                                            type="number"
+                                            name='total_price'
+                                            value={transaction_product.total_price}
+                                        />
+                                    </Form.Group>
+                                </Form.Row>
+                            )
+                        })
+                    }
                     <hr/>
                     <Form.Row>
                         <Form.Group md='4' as={Col} controlId="exampleForm.ControlTransport">

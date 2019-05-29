@@ -42,12 +42,17 @@ form .form-label {
 }
 form .form-control {
     color: black;
+    font-size: 14px;
 }
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
+input[type='file'] {
+    font-size:13px;
+    padding-top: 10px;
+}
 button[type='submit'] {
     margin-left: 10px;
 }

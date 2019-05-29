@@ -106,7 +106,7 @@ class AdminTransactionReadForm extends Component {
                                         <Form.Control
                                             disabled
                                             type="number"
-                                            name='product_name'
+                                            name='price'
                                             value={transaction_product.price}
                                         />
                                     </Form.Group>
@@ -115,7 +115,7 @@ class AdminTransactionReadForm extends Component {
                                         <Form.Control
                                             disabled
                                             type="number"
-                                            name='product_name'
+                                            name='total'
                                             value={transaction_product.total}
                                         />
                                     </Form.Group>
@@ -124,7 +124,7 @@ class AdminTransactionReadForm extends Component {
                                         <Form.Control
                                             disabled
                                             type="number"
-                                            name='product_name'
+                                            name='total_price'
                                             value={transaction_product.total_price}
                                         />
                                     </Form.Group>
