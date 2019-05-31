@@ -54,17 +54,17 @@ class AdminProductList extends Component {
                     <thead>
                     <tr>
                         <th>Số thứ tự</th>
-                        <th>Tên Sản phẩm</th>
+                        <th>Tên sản phẩm</th>
                         <th>Ngày tạo</th>
                         <th>Ngày cập nhật</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.productList.map(product => {
+                    {this.state.productList.map((product, idx) => {
                         return (
                             <tr key={product.id}>
-                                <td><Link to={`/admin/product/${product.id}`}>{product.id}</Link></td>
-                                <td>{product.name}</td>
+                                <td>{idx + 1}</td>
+                                <td><Link to={`/admin/product/${product.id}`}>{product.name}</Link></td>
                                 <td>{convertUtcTimeToLocalTime(product.created_at)}</td>
                                 <td>{convertUtcTimeToLocalTime(product.updated_at)}</td>
                             </tr>

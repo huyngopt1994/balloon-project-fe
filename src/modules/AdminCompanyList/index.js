@@ -47,17 +47,17 @@ class AdminCompanyList extends Component {
                     <thead>
                     <tr>
                         <th>Số thứ tự</th>
-                        <th>Tên Công ty</th>
+                        <th>Tên công ty</th>
                         <th>Ngày tạo</th>
                         <th>Ngày cập nhật</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.companyList.map(company => {
+                    {this.state.companyList.map((company, idx) => {
                         return (
                             <tr key={company.id}>
-                                <td><Link to={`/admin/company/${company.id}`}>{company.id}</Link></td>
-                                <td>{company.name}</td>
+                                <td>{idx+1}</td>
+                                <td><Link to={`/admin/company/${company.id}`}>{company.name}</Link></td>
                                 <td>{convertUtcTimeToLocalTime(company.created_at)}</td>
                                 <td>{convertUtcTimeToLocalTime(company.updated_at)}</td>
                             </tr>
