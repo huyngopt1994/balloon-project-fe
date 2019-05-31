@@ -85,7 +85,7 @@ export function getTransactionOne(transactionId) {
 }
 
 export function createTransaction(transactionData) {
-    return axios.post(`${env.BACKEND_URL}/admin/transaction`, transactionData)
+    return axios.post(`${env.BACKEND_URL}/admin/transaction/`, transactionData)
 }
 
 function updateTransaction(transactionId, transactionData) {

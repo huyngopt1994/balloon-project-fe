@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import { createProduct, getCompanyList, getProductList } from '../../api'
+import { createTransaction, getCompanyList, getProductList } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { error, success } from '../../components/toastr'
 
@@ -10,15 +10,9 @@ class AdminTransactionForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: '',
             type: '',
             transport_fee: 0,
-            created_at: '',
-            updated_at: '',
-            company: {
-                id: '',
-                name: ''
-            },
+            company_id: '',
             transaction_products: [],
             signed_name: '',
             total_price_before_vat: 0,
@@ -49,10 +43,13 @@ class AdminTransactionForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        createProduct(this.state)
+        let sentData = this.state
+        delete sentData.companyList
+        delete sentData.productList
+        createTransaction(sentData)
             .then(
                 res => {
-                    success('Tạo sản phẩm thành công!')
+                    success('Tạo hoá đơn thành công!')
                 }
             )
             .catch(
@@ -87,6 +84,7 @@ class AdminTransactionForm extends Component {
     }
 
     handleChange(event) {
+
         this.setState({ [event.target.name]: event.target.value })
     }
 
@@ -120,7 +118,7 @@ class AdminTransactionForm extends Component {
     addTransactionProduct = (e) => {
         this.setState(prevState => ({
             transaction_products: [...prevState.transaction_products, {
-                product_name: '',
+                product_id: '',
                 price: 0,
                 total: 0,
                 total_price: 0
@@ -138,15 +136,24 @@ class AdminTransactionForm extends Component {
                     <Form.Row>
                         <Form.Group controlId="exampleForm.ControlSelectType">
                             <Form.Label>Loại hoá đơn</Form.Label>
-                            <Form.Control as="select">
-                                <option>Thông thường</option>
-                                <option>Đỏ</option>
+                            <Form.Control
+                                as="select"
+                                onChange={this.handleChange}
+                                name="type"
+                            >
+                                <option disabled selected value> -- Vui lòng lựa chọn --</option>
+                                <option value="NT">Thông thường</option>
+                                <option value="RT">Đỏ</option>
 
                             </Form.Control>
                         </Form.Group>
                         <Form.Group controlId="exampleForm.ControlSelectType">
                             <Form.Label>Công ty</Form.Label>
-                            <Form.Control as="select">
+                            <Form.Control as="select"
+                                          name='company_id'
+                                          onChange={this.handleChange}
+                            >
+                                <option disabled selected value> -- Vui lòng lựa chọn --</option>
                                 {this.createCompanyOptions()}
                             </Form.Control>
                         </Form.Group>
@@ -172,10 +179,10 @@ class AdminTransactionForm extends Component {
                                         <Form.Control
                                             data-id={idx}
                                             as="select"
-                                            value={transaction_product.product_name}
-                                            name='product_name'
+                                            name='product_id'
                                             onChange={this.handleProductTransactionChange}
                                         >
+                                            <option disabled selected> -- Vui lòng lựa chọn --</option>
                                             {this.createProductOptions()}
                                         </Form.Control>
                                     </Form.Group>
