@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import { getTransactionOne } from '../../api'
@@ -162,6 +163,7 @@ class AdminTransactionReadForm extends Component {
                             />
                         </Form.Group>
                     </Form.Row>
+                    <Button>Export PDF file</Button>
                 </Form>
             </div>
 
