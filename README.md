@@ -13,3 +13,6 @@
  We will use `axios` for calling requests to backend.
 
 ## Using node-sass to loading from sass to css.
+
+## Lib for generating pdf
+ We will user `react-pdf` or `jsdpf` let see which one is better ^^.
