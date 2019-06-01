@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
+import { Redirect } from 'react-router-dom'
 import { createTransaction, getCompanyList, getProductList } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { error, success } from '../../components/toastr'
@@ -19,6 +20,10 @@ class AdminTransactionForm extends Component {
             total_price_after_vat: 0,
             companyList: [],
             productList: [],
+            redirect: {
+                is_redirect: false,
+                path: '',
+            }
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -27,6 +32,7 @@ class AdminTransactionForm extends Component {
         this.addTransactionProduct = this.addTransactionProduct.bind(this)
         this.handleProductTransactionChange = this.handleProductTransactionChange.bind(this)
         this.preCalculateTotalAfterAndBeforeVat = this.preCalculateTotalAfterAndBeforeVat.bind(this)
+        this.renderRedirect = this.renderRedirect.bind(this)
     }
 
     componentDidMount() {
@@ -49,7 +55,8 @@ class AdminTransactionForm extends Component {
         createTransaction(sentData)
             .then(
                 res => {
-                    success('Tạo hoá đơn thành công!')
+                    success('Tạo hoá đơn thành công!');
+                    this.setState({ redirect: { is_redirect: true, path: `/admin/transaction/${res.data.id}` } })
                 }
             )
             .catch(
@@ -57,6 +64,12 @@ class AdminTransactionForm extends Component {
                     error('Hệ thống bị lỗi xin vui lòng thử lại!')
                 }
             )
+    }
+
+    renderRedirect = () => {
+        if (this.state.redirect.is_redirect) {
+            return <Redirect to={this.state.redirect.path}/>
+        }
     }
 
     preCalculateTotalAfterAndBeforeVat() {
@@ -95,24 +108,30 @@ class AdminTransactionForm extends Component {
     }
 
     createCompanyOptions = () => {
-        return this.state.companyList.length
-            ? this.state.companyList.map(data => (
-                <option key={data.id} value={data.id}>
-                    {data.name}
-                </option>
-            ))
-            : "";
+        if(this.state.companyList){
+            return this.state.companyList.length
+                ? this.state.companyList.map(data => (
+                    <option key={data.id} value={data.id}>
+                        {data.name}
+                    </option>
+                ))
+                : "";
+        }
+        return "";
 
     }
 
     createProductOptions = () => {
-        return this.state.productList.length
-            ? this.state.productList.map(data => (
-                <option key={data.id} value={data.id}>
-                    {data.name}
-                </option>
-            ))
-            : "";
+        if(this.state.productList){
+            return this.state.productList.length
+                ? this.state.productList.map(data => (
+                    <option key={data.id} value={data.id}>
+                        {data.name}
+                    </option>
+                ))
+                : "";
+        }
+        return "";
 
     }
     addTransactionProduct = (e) => {
@@ -130,6 +149,9 @@ class AdminTransactionForm extends Component {
         return (
             <div>
                 <Navigator/>
+                {this.renderRedirect()}
+
+                {!this.state.redirect.is_redirect &&
                 <Form
                     onSubmit={this.handleSubmit}
                 >
@@ -254,6 +276,8 @@ class AdminTransactionForm extends Component {
                         Tạo Hoá đơn
                     </Button>
                 </Form>
+                }
+
             </div>
 
         )
