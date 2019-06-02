@@ -9,7 +9,6 @@ import { convertUtcTimeToLocalTime } from '../../utils'
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-
 class AdminTransactionReadForm extends Component {
     constructor(props) {
         super(props)
@@ -47,7 +46,23 @@ class AdminTransactionReadForm extends Component {
 
     generatePdf(e) {
         e.preventDefault();
+        let max_row = 12
         let current_date = new Date()
+        let colum_data = []
+        this.state.transaction_products.map((transaction_product, idx) => {
+            colum_data.push(
+                {
+                    stt: idx, name: transaction_product.product_name, total: transaction_product.total,
+                    price: `${transaction_product.price} vnđ`, total_price: `${transaction_product.total_price} vnđ`
+                })
+        })
+        for (let i = colum_data.length; i < max_row; i++) {
+            colum_data.push(
+                {
+                    stt: i, name: '', total: '',
+                    price: '', total_price: ''
+                })
+        }
 
         var doc = new jsPDF();
         doc.setFontSize(12);
@@ -60,19 +75,21 @@ class AdminTransactionReadForm extends Component {
 
         // doc.setFont("custom-font");
 
-        doc.text("CÔNG TY TNHH SX&TM THANH DUNG", 10, 10);
-        doc.setFontSize(20);
-        doc.text("PHIẾU GIAO HÀNG", 110, 10)
+        doc.text("CÔNG TY TNHH SX&TM THANH DUNG", 10, 20);
+        doc.setFontSize(24);
+        doc.text("PHIẾU GIAO HÀNG", 100, 20)
+        doc.setFontSize(18);
+        doc.text(`Số: ${this.state.id}`, 180, 20)
         doc.setFontSize(12);
-        doc.text(`Số: ${this.state.id}`, 180, 10)
-        doc.text("ĐT: 028.38.104 - 0902.301.960", 10, 20);
+        doc.text("ĐT: 028.38.104 - 0902.301.960", 10, 25);
         doc.text('Email: bongbongthanhdung@yahoo.com.vn', 10, 30);
+        doc.setFontSize(11);
         doc.text(`Ngày ${current_date.getDate()} tháng ${current_date.getMonth()} năm ${current_date.getFullYear()}`,
-            140, 20);
-
-        doc.text(`Tên khách hàng: ${this.state.company.name}`, 10, 40)
-        doc.text(`Địa chỉ: ${this.state.company.address}`, 10, 50)
-        doc.text(`Theo đơn hàng số: ${this.state.id}`, 10, 60)
+            140, 25);
+        doc.setFontSize(12);
+        doc.text(`Tên khách hàng: ${this.state.company.name}`, 10, 50)
+        doc.text(`Địa chỉ: ${this.state.company.address}`, 10, 57)
+        doc.text(`Theo đơn hàng số: ${this.state.id}`, 10, 64)
         doc.autoTable({
             styles: { font: "custom-font" },
             headStyles: {
@@ -84,18 +101,21 @@ class AdminTransactionReadForm extends Component {
                 { header: 'ĐƠN GIÁ', dataKey: 'price' },
                 { header: 'THÀNH TIỀN', dataKey: 'total_price' },
             ],
-            margin: { top: 70 }
+            margin: { top: 80 },
+            body: colum_data
         });
 
         doc.setFontSize(12);
-        doc.text(`Tổng tiền hàng: ${this.state.total_price_before_vat}`, 70, 130)
-        doc.text(`VAT 10%: ${this.state.total_price_after_vat - this.state.total_price_before_vat}`, 70, 140)
-        doc.text(`Tổng cộng: ${this.state.total_price_after_vat}`, 70, 150)
-        doc.text('Khách hàng', 60, 160)
-        doc.text('Người viết hoá đơn', 130, 160)
-        doc.text('(ký tên)', 65, 165)
-        doc.text('(ký tên)', 140, 165)
-        doc.text(`${this.state.signed_name}`, 65, 175)
+        doc.text(`Tổng tiền hàng: ${this.state.total_price_before_vat} vnđ`, 140, 210)
+        doc.text(`VAT 10%: ${this.state.total_price_after_vat - this.state.total_price_before_vat} vnđ`, 140, 217)
+        doc.text(`Tổng cộng: ${this.state.total_price_after_vat} vnđ`, 140, 224)
+        doc.text('Khách hàng', 60, 260)
+        doc.text('Người viết hoá đơn', 130, 260)
+        let sign_name = 65
+        doc.text('(ký tên)', sign_name, 265)
+        doc.text('(ký tên)', 140, 265)
+
+        doc.text(`${this.state.signed_name}`, Math.floor(sign_name - this.state.signed_name.length / 2), 275)
 
         let file_name = `hoa_don_${this.state.id}.pdf`
         doc.save(`${file_name}`)
