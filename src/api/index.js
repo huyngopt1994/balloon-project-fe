@@ -76,8 +76,8 @@ export function updateCompany(companyId, companyData) {
     })
 }
 
-export function getTransactionList() {
-    return axios.get(`${env.BACKEND_URL}/admin/transaction`)
+export function getTransactionList(params = {}) {
+    return axios.get(`${env.BACKEND_URL}/admin/transaction`, { params: params })
 }
 
 export function getTransactionOne(transactionId) {

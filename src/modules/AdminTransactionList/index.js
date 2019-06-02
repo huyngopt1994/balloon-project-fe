@@ -24,7 +24,7 @@ class AdminTransactionList extends Component {
 
     onSearchChange(e) {
         if (e.target.value) {
-            getTransactionList({ search: e.target.value })
+            getTransactionList({ company: e.target.value })
                 .then(res => {
                     this.setState({ transactionList: res.data.results })
                 })
