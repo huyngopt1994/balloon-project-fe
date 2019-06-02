@@ -45,7 +45,7 @@ class AdminProductList extends Component {
                 <Navigator/>
                 <div>
                     <FormControl
-                        size='sm' type="text" placeholder="Search" className="mr-sm-2 adminSearch"
+                        size='sm' type="text" placeholder="Search by product name" className="mr-sm-2 adminSearch"
                         onChange={this.onSearchChange}
                     />
                     <Link to='/admin/product/create'><Button className='createButton'>Tạo mới</Button></Link>
