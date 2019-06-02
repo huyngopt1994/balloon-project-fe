@@ -3,8 +3,9 @@ import { FormControl } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
-import { getProductList, getTransactionList } from '../../api'
+import { getTransactionList } from '../../api'
 import Navigator from '../../components/AdminNav'
+import { convertUtcTimeToLocalTime } from '../../utils'
 
 
 class AdminTransactionList extends Component {
@@ -68,8 +69,8 @@ class AdminTransactionList extends Component {
                                     to={`/admin/company/${transaction.company.id}`}>{transaction.company.name}</Link>
                                 </td>
                                 <td>{transaction.signed_name}</td>
-                                <td>{transaction.created_at}</td>
-                                <td>{transaction.updated_at}</td>
+                                <td>{convertUtcTimeToLocalTime(transaction.created_at)}</td>
+                                <td>{convertUtcTimeToLocalTime(transaction.updated_at)}</td>
                             </tr>
                         )
                     })}
