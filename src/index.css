@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Roboto,sans-serif;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
@@ -29,33 +29,34 @@ form {
     margin: 40px auto;
     padding: 20px;
     width: 1000px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
 
 }
 
 form .form-group {
     padding: 10px 15px !important;
 }
+
 form .form-label {
     color: #00aeef;
     font-size: 14px;
 }
+
 form .form-control {
     color: black;
     font-size: 14px;
 }
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+
 
 input[type='file'] {
-    font-size:13px;
+    font-size: 13px;
     padding-top: 10px;
 }
+
 button[type='submit'] {
     margin-left: 10px;
 }
+
 table.table {
     width: 96% !important;
     margin: 0 auto;
