@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form'
 import { getTransactionOne } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { error } from '../../components/toastr'
-import { convertUtcTimeToLocalTime } from '../../utils'
+import { convertUtcTimeToLocalTime, getDateTime } from '../../utils'
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -47,13 +47,18 @@ class AdminTransactionReadForm extends Component {
     generatePdf(e) {
         e.preventDefault();
         let max_row = 15
-        let current_date = new Date()
+
+        let current_date = getDateTime(this.state.created_at)
+
         let colum_data = []
         this.state.transaction_products.map((transaction_product, idx) => {
             colum_data.push(
                 {
-                    stt: idx, name: transaction_product.product_name, total: transaction_product.total,
-                    price: `${transaction_product.price} vnđ`, total_price: `${transaction_product.total_price} vnđ`
+                    stt: idx,
+                    name: <transaction_product className="product_name"></transaction_product>,
+                    total: transaction_product.total,
+                    price: `${transaction_product.price} vnđ`,
+                    total_price: `${transaction_product.total_price} vnđ`
                 })
         })
         for (let i = colum_data.length; i < max_row; i++) {
@@ -84,7 +89,7 @@ class AdminTransactionReadForm extends Component {
         doc.text("ĐT: 028.38.104 - 0902.301.960", 10, 25);
         doc.text('Email: bongbongthanhdung@yahoo.com.vn', 10, 30);
         doc.setFontSize(11);
-        doc.text(`Ngày ${current_date.getDate()} tháng ${current_date.getMonth()} năm ${current_date.getFullYear()}`,
+        doc.text(`Ngày ${current_date.getDate()} tháng ${current_date.getMonth() + 1} năm ${current_date.getFullYear()}`,
             140, 25);
         doc.setFontSize(12);
         doc.text(`Tên khách hàng: ${this.state.company.name}`, 10, 45)
