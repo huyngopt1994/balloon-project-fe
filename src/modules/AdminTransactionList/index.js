@@ -1,36 +1,72 @@
 import React, { Component } from 'react';
 import { FormControl } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
+import Pagination from 'react-bootstrap/Pagination'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
 import { getTransactionList } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { convertUtcTimeToLocalTime } from '../../utils'
 
-
 class AdminTransactionList extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            transactionList: []
+            transactionList: [],
+            total: 0,
+            total_page: [],
+            per_page: 10,
+            current_page: 1,
+            searching: ''
         }
-        getTransactionList()
+        getTransactionList({ page: this.state.current_page })
             .then(res => {
-                this.setState({ transactionList: res.data.results })
+                let total_page = Math.ceil(res.data.count / this.state.per_page)
+                this.setState({
+                    transactionList: res.data.results,
+                    total_page: new Array(total_page).fill(1),
+                    total: res.data.count
+                })
             })
 
         this.onSearchChange = this.onSearchChange.bind(this);
+        this.onChangePage = this.onChangePage.bind(this);
     }
+
 
     onSearchChange(e) {
         if (e.target.value) {
-            getTransactionList({ company: e.target.value })
+            this.setState({ searching: e.target.value })
+            getTransactionList({ company: e.target.value, page: this.state.current_page })
                 .then(res => {
-                    this.setState({ transactionList: res.data.results })
+                    let total_page = Math.ceil(res.data.count / this.state.per_page)
+                    this.setState({
+                        transactionList: res.data.results,
+                        total_page: new Array(total_page).fill(1),
+                        total: res.data.count,
+                    })
                 })
 
         }
+    }
+
+    onChangePage(pageNumber) {
+        let params = {}
+        if (this.state.searching) {
+            params = { company: this.state.searching }
+        }
+
+        getTransactionList({ ...params, page: pageNumber })
+            .then(
+                res => {
+                    this.setState({
+                        transactionList: res.data.results,
+                        searching: this.state.searching,
+                        current_page: pageNumber
+                    })
+                }
+            )
     }
 
     render() {
@@ -77,6 +113,21 @@ class AdminTransactionList extends Component {
 
                     </tbody>
                 </Table>
+                <Pagination class>
+                    {
+                        this.state.total_page.map((data, idx) => {
+                            return (
+                                <Pagination.Item
+                                    key={idx}
+                                    onClick={e => this.onChangePage(idx + 1)}
+                                >
+                                    {idx + 1}
+                                </Pagination.Item>
+                            )
+                        })
+                    }
+                </Pagination>
+
             </div>
 
 

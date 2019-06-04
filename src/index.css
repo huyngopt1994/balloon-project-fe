@@ -61,3 +61,8 @@ table.table {
     width: 96% !important;
     margin: 0 auto;
 }
+
+.pagination {
+    float: right;
+    margin-right: 40px;
+}
