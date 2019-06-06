@@ -119,6 +119,7 @@ class AdminTransactionList extends Component {
                             return (
                                 <Pagination.Item
                                     key={idx}
+                                    active={this.state.current_page === (idx + 1)}
                                     onClick={e => this.onChangePage(idx + 1)}
                                 >
                                     {idx + 1}
