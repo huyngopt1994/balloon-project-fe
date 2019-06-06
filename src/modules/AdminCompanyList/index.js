@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { getCompanyList } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { convertUtcTimeToLocalTime } from '../../utils'
+import Pagination from 'react-bootstrap/Pagination'
 
 
 class AdminCompanyList extends Component {
@@ -13,24 +14,60 @@ class AdminCompanyList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            companyList: []
+            companyList: [],
+            total: 0,
+            total_page: [],
+            per_page: 10,
+            current_page: 1,
+            searching: ''
         }
-        getCompanyList()
+        getCompanyList({ page: this.state.current_page })
             .then(res => {
-                this.setState({ companyList: res.data.results })
+                let total_page = Math.ceil(res.data.count / this.state.per_page)
+                this.setState({
+                    companyList: res.data.results,
+                    total_page: new Array(total_page).fill(1),
+                    total: res.data.count
+                })
             })
         this.onSearchChange = this.onSearchChange.bind(this)
+        this.onChangePage = this.onChangePage.bind(this)
     }
 
     onSearchChange(e) {
         if (e.target.value) {
-            getCompanyList({ search: e.target.value })
+            this.setState({ searching: e.target.value })
+            getCompanyList({ search: e.target.value, page: this.state.current_page })
                 .then(res => {
-                    this.setState({ companyList: res.data.results })
+                    let total_page = Math.ceil(res.data.count / this.state.per_page)
+                    this.setState({
+                        companyList: res.data.results,
+                        total_page: new Array(total_page).fill(1),
+                        total: res.data.count,
+                    })
                 })
 
         }
     }
+
+    onChangePage(pageNumber) {
+        let params = {}
+        if (this.state.searching) {
+            params = { search: this.state.searching }
+        }
+
+        getCompanyList({ ...params, page: pageNumber })
+            .then(
+                res => {
+                    this.setState({
+                        companyList: res.data.results,
+                        searching: this.state.searching,
+                        current_page: pageNumber
+                    })
+                }
+            )
+    }
+
 
     render() {
         return (
@@ -56,7 +93,7 @@ class AdminCompanyList extends Component {
                     {this.state.companyList.map((company, idx) => {
                         return (
                             <tr key={company.id}>
-                                <td>{idx+1}</td>
+                                <td>{idx + 1}</td>
                                 <td><Link to={`/admin/company/${company.id}`}>{company.name}</Link></td>
                                 <td>{convertUtcTimeToLocalTime(company.created_at)}</td>
                                 <td>{convertUtcTimeToLocalTime(company.updated_at)}</td>
@@ -66,6 +103,21 @@ class AdminCompanyList extends Component {
 
                     </tbody>
                 </Table>
+                <Pagination>
+                    {
+                        this.state.total_page.map((data, idx) => {
+                            return (
+                                <Pagination.Item
+                                    key={idx}
+                                    active={this.state.current_page === (idx + 1)}
+                                    onClick={e => this.onChangePage(idx + 1)}
+                                >
+                                    {idx + 1}
+                                </Pagination.Item>
+                            )
+                        })
+                    }
+                </Pagination>
             </div>
 
 

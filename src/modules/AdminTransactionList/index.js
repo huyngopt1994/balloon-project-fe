@@ -113,7 +113,7 @@ class AdminTransactionList extends Component {
 
                     </tbody>
                 </Table>
-                <Pagination class>
+                <Pagination >
                     {
                         this.state.total_page.map((data, idx) => {
                             return (
