@@ -55,7 +55,7 @@ class AdminTransactionReadForm extends Component {
             colum_data.push(
                 {
                     stt: idx,
-                    name: <transaction_product className="product_name"></transaction_product>,
+                    name: transaction_product.product_name,
                     total: transaction_product.total,
                     price: `${transaction_product.price} vnđ`,
                     total_price: `${transaction_product.total_price} vnđ`
@@ -100,7 +100,8 @@ class AdminTransactionReadForm extends Component {
             headStyles: {
                 font: "custom-font"
             },
-            columns: [{ header: 'STT', dataKey: 'stt' },
+            columns: [
+                { header: 'STT', dataKey: 'stt' },
                 { header: 'TÊN HÀNG', dataKey: 'name' },
                 { header: 'SỐ LƯỢNG', dataKey: 'total' },
                 { header: 'ĐƠN GIÁ', dataKey: 'price' },
