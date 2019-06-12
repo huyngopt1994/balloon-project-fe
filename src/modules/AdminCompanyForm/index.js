@@ -81,6 +81,14 @@ class AdminCompanyForm extends Component {
                                 value={this.state.address}
                             />
                         </Form.Group>
+                        <Form.Group md='3' as={Col} controlId="formGridTaxNumber">
+                            <Form.Label>Mã số thuế</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="tax_number"
+                                onChange={this.handleChange}
+                            />
+                        </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
@@ -90,15 +98,6 @@ class AdminCompanyForm extends Component {
                                 type="text"
                                 onChange={this.handleChange}
                                 name='telephone'
-                            />
-                        </Form.Group>
-
-                        <Form.Group md='3' as={Col} controlId="formGridTaxNumber">
-                            <Form.Label>Mã số thuế</Form.Label>
-                            <Form.Control
-                                type="text"
-                                name="tax_number"
-                                onChange={this.handleChange}
                             />
                         </Form.Group>
 

@@ -95,6 +95,7 @@ class AdminTransactionReadForm extends Component {
         doc.text(`Tên khách hàng: ${this.state.company.name}`, 10, 45)
         doc.text(`Địa chỉ: ${this.state.company.address}`, 10, 52)
         doc.text(`Theo đơn hàng số: ${this.state.id}`, 10, 59)
+        doc.text(`Địa chỉ giao hàng: ${this.state.company.address}`, 10, 66)
         doc.autoTable({
             styles: { font: "custom-font" },
             headStyles: {
@@ -121,7 +122,7 @@ class AdminTransactionReadForm extends Component {
         doc.text('(ký tên)', sign_name, 255)
         doc.text('(ký tên)', 140, 255)
         doc.setFontSize(11);
-        doc.text(`${this.state.signed_name}`, Math.floor(sign_name - this.state.signed_name.length / 2), 265)
+        doc.text(`${this.state.signed_name}`, Math.floor(140 - this.state.signed_name.length / 4), 265)
 
         let file_name = `hoa_don_${this.state.id}.pdf`
         doc.save(`${file_name}`)
