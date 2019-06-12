@@ -13,6 +13,7 @@ class AdminCompanyUpdatedForm extends Component {
         this.state = {
             name: '',
             telephone: '',
+            work_phone: '',
             tax_number: '',
             address: '',
             contact_name: '',
@@ -133,9 +134,17 @@ class AdminCompanyUpdatedForm extends Component {
                             />
                         </Form.Group>
 
+                        <Form.Group md='3' as={Col} controlId="formGridPhone">
+                            <Form.Label>Số điện thoại bàn</Form.Label>
+                            <Form.Control
+                                type="text"
+                                onChange={this.handleChange}
+                                name='work_phone'
+                            />
+                        </Form.Group>
 
                         <Form.Group md='4' as={Col} controlId="formGridContact">
-                            <Form.Label>Người liên lạc</Form.Label>
+                            <Form.Label>Thông tin thêm</Form.Label>
                             <Form.Control
                                 type="text"
                                 name="contact_name"
