@@ -21,7 +21,7 @@ class AdminCompanyList extends Component {
             current_page: 1,
             searching: ''
         }
-        getCompanyList({ page: this.state.current_page })
+        getCompanyList({ page: this.state.current_page, ordering: '-updated_at' })
             .then(res => {
                 let total_page = Math.ceil(res.data.count / this.state.per_page)
                 this.setState({
@@ -37,7 +37,7 @@ class AdminCompanyList extends Component {
     onSearchChange(e) {
         if (e.target.value) {
             this.setState({ searching: e.target.value })
-            getCompanyList({ search: e.target.value, page: this.state.current_page })
+            getCompanyList({ search: e.target.value, page: this.state.current_page, ordering: '-updated_at' })
                 .then(res => {
                     let total_page = Math.ceil(res.data.count / this.state.per_page)
                     this.setState({

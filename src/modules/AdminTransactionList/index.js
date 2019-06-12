@@ -20,7 +20,7 @@ class AdminTransactionList extends Component {
             current_page: 1,
             searching: ''
         }
-        getTransactionList({ page: this.state.current_page })
+        getTransactionList({ page: this.state.current_page, ordering: '-updated_at' })
             .then(res => {
                 let total_page = Math.ceil(res.data.count / this.state.per_page)
                 this.setState({
@@ -54,7 +54,7 @@ class AdminTransactionList extends Component {
     onChangePage(pageNumber) {
         let params = {}
         if (this.state.searching) {
-            params = { company: this.state.searching }
+            params = { company: this.state.searching, ordering: '-updated_at' }
         }
 
         getTransactionList({ ...params, page: pageNumber })
@@ -113,7 +113,7 @@ class AdminTransactionList extends Component {
 
                     </tbody>
                 </Table>
-                <Pagination >
+                <Pagination>
                     {
                         this.state.total_page.map((data, idx) => {
                             return (

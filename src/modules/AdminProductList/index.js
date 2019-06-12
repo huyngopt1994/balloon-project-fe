@@ -3,7 +3,7 @@ import { FormControl } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
-import { getProductList, getTransactionList } from '../../api'
+import { getProductList } from '../../api'
 import Navigator from '../../components/AdminNav'
 import { convertUtcTimeToLocalTime } from '../../utils'
 import Pagination from 'react-bootstrap/Pagination'
@@ -21,7 +21,7 @@ class AdminProductList extends Component {
             current_page: 1,
             searching: ''
         }
-        getProductList({ page: this.state.current_page })
+        getProductList({ page: this.state.current_page, ordering: '-updated_at' })
             .then(res => {
                 let total_page = Math.ceil(res.data.count / this.state.per_page)
                 this.setState({
@@ -50,7 +50,7 @@ class AdminProductList extends Component {
             params = { search: this.state.searching }
         }
 
-        getProductList({ ...params, page: pageNumber })
+        getProductList({ ...params, page: pageNumber , ordering: '-updated_at'})
             .then(
                 res => {
                     this.setState({

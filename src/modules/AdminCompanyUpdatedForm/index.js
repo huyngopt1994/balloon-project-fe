@@ -140,6 +140,7 @@ class AdminCompanyUpdatedForm extends Component {
                                 type="text"
                                 onChange={this.handleChange}
                                 name='work_phone'
+                                value={this.state.work_phone}
                             />
                         </Form.Group>
 
