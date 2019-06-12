@@ -38,7 +38,7 @@ class AdminTransactionList extends Component {
     onSearchChange(e) {
         if (e.target.value) {
             this.setState({ searching: e.target.value })
-            getTransactionList({ company: e.target.value, page: this.state.current_page })
+            getTransactionList({ company: e.target.value, page: this.state.current_page, ordering: '-updated_at' })
                 .then(res => {
                     let total_page = Math.ceil(res.data.count / this.state.per_page)
                     this.setState({
@@ -54,10 +54,10 @@ class AdminTransactionList extends Component {
     onChangePage(pageNumber) {
         let params = {}
         if (this.state.searching) {
-            params = { company: this.state.searching, ordering: '-updated_at' }
+            params = { company: this.state.searching }
         }
 
-        getTransactionList({ ...params, page: pageNumber })
+        getTransactionList({ ...params, page: pageNumber, ordering: '-updated_at' })
             .then(
                 res => {
                     this.setState({

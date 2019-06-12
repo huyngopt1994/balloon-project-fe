@@ -56,7 +56,7 @@ class AdminCompanyList extends Component {
             params = { search: this.state.searching }
         }
 
-        getCompanyList({ ...params, page: pageNumber })
+        getCompanyList({ ...params, page: pageNumber, ordering: '-updated_at' })
             .then(
                 res => {
                     this.setState({

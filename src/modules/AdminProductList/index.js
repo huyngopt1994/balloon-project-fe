@@ -36,7 +36,7 @@ class AdminProductList extends Component {
 
     onSearchChange(e) {
         if (e.target.value) {
-            getProductList({ search: e.target.value })
+            getProductList({ search: e.target.value, ordering: '-updated_at' })
                 .then(res => {
                     this.setState({ productList: res.data.results })
                 })
@@ -50,7 +50,7 @@ class AdminProductList extends Component {
             params = { search: this.state.searching }
         }
 
-        getProductList({ ...params, page: pageNumber , ordering: '-updated_at'})
+        getProductList({ ...params, page: pageNumber, ordering: '-updated_at' })
             .then(
                 res => {
                     this.setState({
