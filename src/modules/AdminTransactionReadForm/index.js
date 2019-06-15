@@ -26,8 +26,7 @@ class AdminTransactionReadForm extends Component {
             signed_name: '',
             total_price_before_vat: 0,
             total_price_after_vat: 0,
-            tinggi: 11.69,
-            lebar: '08.27',
+            address_transport: ''
         }
         this.generatePdf = this.generatePdf.bind(this)
     }
@@ -95,7 +94,7 @@ class AdminTransactionReadForm extends Component {
         doc.text(`Tên khách hàng: ${this.state.company.name}`, 10, 45)
         doc.text(`Địa chỉ: ${this.state.company.address}`, 10, 52)
         doc.text(`Theo đơn hàng số: ${this.state.id}`, 10, 59)
-        doc.text(`Địa chỉ giao hàng: ${this.state.company.address}`, 10, 66)
+        doc.text(`Địa chỉ giao hàng: ${this.state.address_transport}`, 10, 66)
         doc.autoTable({
             styles: { font: "custom-font" },
             headStyles: {
@@ -146,18 +145,6 @@ class AdminTransactionReadForm extends Component {
                                 value={this.state.type}
                             />
                         </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group md='4' as={Col} controlId="formGridTaxNumber">
-                            <Form.Label>Giờ tạo</Form.Label>
-                            <Form.Control
-                                disabled
-                                type="text"
-                                name="tax_number"
-                                value={convertUtcTimeToLocalTime(this.state.created_at)}
-                            />
-                        </Form.Group>
-
                         <Form.Group md='4' as={Col} controlId="formGridPhone">
                             <Form.Label>Người kí tên</Form.Label>
                             <Form.Control
@@ -168,13 +155,33 @@ class AdminTransactionReadForm extends Component {
                             />
                         </Form.Group>
 
-                        <Form.Group md='4' as={Col} controlId="formGridCompanyName">
+                        <Form.Group as={Col} controlId="formGridCompanyName">
                             <Form.Label>Tên công ty</Form.Label>
                             <Form.Control
                                 disabled
                                 type="text"
                                 name='company_name'
                                 value={this.state.company.name}
+                            />
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formGridTaxNumber">
+                            <Form.Label>Địa chỉ giao hàng</Form.Label>
+                            <Form.Control
+                                disabled
+                                type="text"
+                                name="address_transport"
+                                value={this.state.address_transport}
+                            />
+                        </Form.Group>
+                        <Form.Group md='4' as={Col} controlId="formGridTaxNumber">
+                            <Form.Label>Giờ tạo</Form.Label>
+                            <Form.Control
+                                disabled
+                                type="text"
+                                name="tax_number"
+                                value={convertUtcTimeToLocalTime(this.state.created_at)}
                             />
                         </Form.Group>
                     </Form.Row>

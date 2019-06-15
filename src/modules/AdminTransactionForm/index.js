@@ -20,6 +20,7 @@ class AdminTransactionForm extends Component {
             total_price_after_vat: 0,
             companyList: [],
             productList: [],
+            address_transport: '',
             redirect: {
                 is_redirect: false,
                 path: '',
@@ -180,7 +181,7 @@ class AdminTransactionForm extends Component {
                             </Form.Control>
                         </Form.Group>
 
-                        <Form.Group controlId="exampleForm.ControlSelectType">
+                        <Form.Group as={Col} controlId="exampleForm.ControlText">
                             <Form.Label>Người kí tên</Form.Label>
                             <Form.Control
                                 type="text"
@@ -190,6 +191,15 @@ class AdminTransactionForm extends Component {
                             </Form.Control>
                         </Form.Group>
                     </Form.Row>
+                        <Form.Group >
+                            <Form.Label>Địa chỉ giao hàng</Form.Label>
+                            <Form.Control
+                                type="text"
+                                onChange={this.handleChange}
+                                name='address_transport'
+                                value={this.state.address_transport}>
+                            </Form.Control>
+                        </Form.Group>
                     <hr/>
                     <Button className='add-more-product' onClick={this.addTransactionProduct}>Thêm sản phẩm</Button>
                     {

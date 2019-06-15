@@ -20,6 +20,7 @@ class AdminCompanyList extends Component {
             per_page: 10,
             current_page: 1,
             searching: ''
+
         }
         getCompanyList({ page: this.state.current_page, ordering: '-updated_at' })
             .then(res => {

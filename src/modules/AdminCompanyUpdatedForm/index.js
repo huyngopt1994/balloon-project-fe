@@ -111,7 +111,7 @@ class AdminCompanyUpdatedForm extends Component {
                                 value={this.state.address}
                             />
                         </Form.Group>
-                        <Form.Group md='3' as={Col} controlId="formGridTaxNumber">
+                        <Form.Group md='4' as={Col} controlId="formGridTaxNumber">
                             <Form.Label>Mã số thuế</Form.Label>
                             <Form.Control
                                 type="text"
@@ -144,7 +144,7 @@ class AdminCompanyUpdatedForm extends Component {
                             />
                         </Form.Group>
 
-                        <Form.Group md='4' as={Col} controlId="formGridContact">
+                        <Form.Group  as={Col} controlId="formGridContact">
                             <Form.Label>Thông tin thêm</Form.Label>
                             <Form.Control
                                 type="text"
