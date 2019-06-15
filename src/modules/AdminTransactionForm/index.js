@@ -157,7 +157,7 @@ class AdminTransactionForm extends Component {
                     onSubmit={this.handleSubmit}
                 >
                     <Form.Row>
-                        <Form.Group controlId="exampleForm.ControlSelectType">
+                        <Form.Group sm="3" as={Col} controlId="exampleForm.ControlSelectType">
                             <Form.Label>Loại hoá đơn</Form.Label>
                             <Form.Control
                                 as="select"

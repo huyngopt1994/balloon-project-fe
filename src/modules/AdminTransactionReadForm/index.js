@@ -136,7 +136,7 @@ class AdminTransactionReadForm extends Component {
                 <Form
                 >
                     <Form.Row>
-                        <Form.Group md='3' as={Col} controlId="formGridName">
+                        <Form.Group md='2' as={Col} controlId="formGridName">
                             <Form.Label>Loại hoá đơn</Form.Label>
                             <Form.Control
                                 disabled

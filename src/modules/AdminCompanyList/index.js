@@ -76,7 +76,7 @@ class AdminCompanyList extends Component {
                 <Navigator/>
                 <div>
                     <FormControl
-                        size='sm' type="text" placeholder="Search by company name" className="mr-sm-2 adminSearch"
+                        size='sm' type="text" placeholder="Search by company name or tax" className="mr-sm-2 adminSearch"
                         onChange={this.onSearchChange}
                     />
                     <Link to='/admin/company/create'><Button className='createButton'>Tạo mới</Button></Link>
@@ -86,6 +86,7 @@ class AdminCompanyList extends Component {
                     <tr>
                         <th>Số thứ tự</th>
                         <th>Tên công ty</th>
+                        <th>Mã số thuế</th>
                         <th>Ngày tạo</th>
                         <th>Ngày cập nhật</th>
                     </tr>
@@ -96,6 +97,7 @@ class AdminCompanyList extends Component {
                             <tr key={company.id}>
                                 <td>{idx + 1}</td>
                                 <td><Link to={`/admin/company/${company.id}`}>{company.name}</Link></td>
+                                <td>{company.tax_number}</td>
                                 <td>{convertUtcTimeToLocalTime(company.created_at)}</td>
                                 <td>{convertUtcTimeToLocalTime(company.updated_at)}</td>
                             </tr>
