@@ -24,6 +24,7 @@ function App() {
             {/*<Route exact path='/contact-us' component={ContactUs}/>*/}
             {/*<Route exact path='/services' component={Services}/>*/}
             <Route exact path='/admin' component={AdminCompanyList}/>
+            <Route exact path='/admin/login' component={Login}/>
             <Route exact path='/admin/company/create' component={AdminCompanyForm}/>
             <Route exact path='/admin/company/:id(\d+)' component={AdminCompanyUpdatedForm}/>
             <Route exact path='/admin/product' component={AdminProductList} />
