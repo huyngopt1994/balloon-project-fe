@@ -112,16 +112,17 @@ class AdminTransactionReadForm extends Component {
         });
 
         doc.setFontSize(12);
-        doc.text(`Tổng tiền hàng: ${this.state.total_price_before_vat} vnđ`, 140, 210)
-        doc.text(`VAT 10%: ${this.state.total_price_after_vat - this.state.total_price_before_vat} vnđ`, 140, 217)
-        doc.text(`Tổng cộng: ${this.state.total_price_after_vat} vnđ`, 140, 224)
+        doc.text(`Tiền vận chuyển: ${this.state.transport_fee} vnđ`, 140, 210)
+        doc.text(`Tổng tiền hàng: ${this.state.total_price_before_vat} vnđ`, 140, 217)
+        doc.text(`VAT 10%: ${this.state.total_price_after_vat - this.state.total_price_before_vat} vnđ`, 140, 224)
+        doc.text(`Tổng cộng: ${this.state.total_price_after_vat} vnđ`, 140, 231)
         doc.text('Khách hàng', 60, 250)
         doc.text('Người viết hoá đơn', 130, 250)
         let sign_name = 65
         doc.text('(ký tên)', sign_name, 255)
         doc.text('(ký tên)', 140, 255)
         doc.setFontSize(11);
-        doc.text(`${this.state.signed_name}`, Math.floor(140 - this.state.signed_name.length / 4), 265)
+        doc.text(`${this.state.signed_name}`, Math.floor(130 + ('Người viết hoá đơn'.length - this.state.signed_name.length) / 2), 265)
 
         let file_name = `hoa_don_${this.state.id}.pdf`
         doc.save(`${file_name}`)
